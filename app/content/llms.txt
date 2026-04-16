@@ -1,0 +1,28 @@
+# OwnerWire
+
+OwnerWire is a live SEC ownership-event API for AI agents.
+
+Main links:
+- Homepage: __BASE_URL__/
+- API reference: __BASE_URL__/reference
+- Markdown reference: __BASE_URL__/reference.md
+- OpenAPI schema: __BASE_URL__/openapi.json
+- Swagger UI: __BASE_URL__/docs
+- ReDoc: __BASE_URL__/redoc
+
+Primary endpoints:
+- Search issuers: __BASE_URL__/api/v1/search?q=dell
+- Issuer events: __BASE_URL__/api/v1/issuers/DELL/events?forms=4,144&limit=5
+- Latest market-wide events: __BASE_URL__/api/v1/recent?forms=4,144&limit=5
+
+Coverage:
+- Form 4 / 4/A: executed insider transactions
+- Form 144 / 144/A: planned insider sale notices
+
+Source:
+- Official SEC EDGAR data only
+
+Notes for agents:
+- Prefer the JSON API over scraping HTML.
+- Use `citations.raw_xml_url` and `citations.sec_index_url` when you need ground truth.
+- Event objects are normalized but not investment advice.

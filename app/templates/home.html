@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% block content %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebAPI",
+  "name": "OwnerWire API",
+  "description": "Citation-backed API for SEC Form 4 and Form 144 ownership events.",
+  "documentation": "{{ examples.reference }}",
+  "url": "{{ base_url }}/",
+  "provider": {
+    "@type": "Organization",
+    "name": "OwnerWire"
+  }
+}
+</script>
+<section class="hero">
+  <p class="eyebrow">Live Wall Street ownership data for AI agents</p>
+  <h1>{{ subtitle }}</h1>
+  <p class="lede">
+    OwnerWire turns messy SEC ownership filings into clean JSON. The launch wedge is narrow on purpose:
+    executed insider transactions from Form 4 and planned insider sales from Form 144.
+  </p>
+  <div class="cta-row">
+    <a class="button primary" href="/reference">Read the API reference</a>
+    <a class="button" href="/openapi.json">OpenAPI schema</a>
+    <a class="button" href="/llms.txt">llms.txt</a>
+  </div>
+</section>
+
+<section class="grid two-up">
+  <article class="card">
+    <h2>Why this dataset?</h2>
+    <ul>
+      <li>Public SEC data, but still annoyingly messy in raw XML.</li>
+      <li>High-signal for AI agents monitoring insider activity and planned sell pressure.</li>
+      <li>Citation-backed payloads so an agent can verify the raw filing before acting.</li>
+    </ul>
+  </article>
+  <article class="card">
+    <h2>What the API returns</h2>
+    <ul>
+      <li>Issuer name, ticker, CIK</li>
+      <li>Reporter or seller identity</li>
+      <li>Role and relationship to issuer</li>
+      <li>Normalized transactions or planned sale details</li>
+      <li>Direct SEC citation URLs</li>
+    </ul>
+  </article>
+</section>
+
+<section class="card">
+  <h2>Quickstart</h2>
+  <div class="example-block">
+    <h3>Search issuers</h3>
+    <code>{{ examples.search }}</code>
+  </div>
+  <div class="example-block">
+    <h3>Get one issuer's latest ownership events</h3>
+    <code>{{ examples.issuer_events }}</code>
+  </div>
+  <div class="example-block">
+    <h3>Get the latest market-wide feed</h3>
+    <code>{{ examples.recent }}</code>
+  </div>
+</section>
+
+<section class="grid two-up">
+  <article class="card">
+    <h2>Agent discovery</h2>
+    <ul>
+      <li><a href="{{ examples.openapi }}">OpenAPI schema</a></li>
+      <li><a href="{{ examples.llms }}">llms.txt</a></li>
+      <li><a href="/llms-full.txt">llms-full.txt</a></li>
+      <li><a href="{{ examples.reference }}">HTML reference</a></li>
+      <li><a href="/reference.md">Markdown reference</a></li>
+      <li><a href="/sitemap.xml">sitemap.xml</a></li>
+    </ul>
+  </article>
+  <article class="card">
+    <h2>Intended use cases</h2>
+    <ul>
+      <li>Insider transaction monitoring</li>
+      <li>Planned-sale alerting from Form 144</li>
+      <li>LLM workflows that need raw SEC citation URLs</li>
+      <li>x402-ready pay-per-call data access later</li>
+    </ul>
+  </article>
+</section>
+{% endblock %}

@@ -1,0 +1,42 @@
+# OwnerWire Full Notes for Language Models
+
+OwnerWire is a narrow API, not a full market-data platform.
+
+Purpose:
+- package messy SEC ownership filings into stable JSON
+- help AI agents reason about insider flow without scraping EDGAR by hand
+
+What OwnerWire covers now:
+- Form 4 and 4/A
+  - actual insider transaction filings
+  - includes reporter roles, transactions, footnotes, and raw SEC citations
+- Form 144 and 144/A
+  - planned sale notices
+  - includes seller identity, intended sale size, rough sale date, prior sales, remarks, and raw SEC citations
+
+What OwnerWire does not cover yet:
+- market quotes
+- fundamentals
+- options chains
+- 13D/13G normalization
+- portfolio analytics
+
+Canonical docs:
+- Homepage: __BASE_URL__/
+- Reference: __BASE_URL__/reference
+- Markdown reference: __BASE_URL__/reference.md
+- OpenAPI: __BASE_URL__/openapi.json
+
+Recommended agent workflow:
+1. Search issuer if needed with `/api/v1/search`.
+2. Pull issuer events or market-wide events.
+3. Use the citations to verify anything high-stakes.
+4. Distinguish between executed insider trades (Form 4) and planned sales (Form 144).
+
+Important caveat:
+A Form 144 is a notice of intended sale, not proof the sale occurred.
+
+Example requests:
+- `GET __BASE_URL__/api/v1/search?q=travere`
+- `GET __BASE_URL__/api/v1/issuers/TVTX/events?forms=4,144&limit=10`
+- `GET __BASE_URL__/api/v1/recent?forms=4,144&limit=10`

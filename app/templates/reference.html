@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block content %}
+<article class="doc-shell">
+  <h1>{{ title }}</h1>
+  <div class="doc-content">{{ content | safe }}</div>
+</article>
+{% endblock %}
