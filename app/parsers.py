@@ -52,6 +52,12 @@ def _iso_date(value: str | None) -> str | None:
     raw = value.strip()
     if not raw:
         return None
+    try:
+        if "T" in raw and (raw.endswith("Z") or "+" in raw[10:] or "-" in raw[10:]):
+            parsed = datetime.fromisoformat(raw.replace("Z", "+00:00"))
+            return parsed.isoformat().replace("+00:00", "Z")
+    except ValueError:
+        pass
     for fmt in ("%Y-%m-%d", "%m/%d/%Y", "%Y%m%d%H%M%S"):
         try:
             parsed = datetime.strptime(raw, fmt)
